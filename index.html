@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>quiz</title>
+    <style>
+      .option {
+        background-color: lightblue;
+        padding: 5px;
+        margin: 5px;
+      }
+
+      .question {
+        font-size: 16pt;
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="question">
+      Who was the first President of the United States of America?
+    </div>
+
+    <div class="options">
+      <div class="option">George Washington</div>
+      <div class="option">Abraham Lincoln</div>
+      <div class="option">Barack Obama</div>
+      <div class="option">Donald Trump</div>
+    </div>
+
+    <script>
+      let elts = document.getElementsByClassName("option");
+
+      function blink(elt) {
+        elt.style.visibility = elt.style == "hidden" ? "" : "hidden";
+      }
+
+      Array.prototype.forEach.call(elts, function (elt) {
+        elt.addEventListener("click", function () {
+          var count = 1;
+          var intervalID = setInterval(function () {
+            console.log("count: ", count);
+            if (elt.style.backgroundColor == "lightgreen") {
+              elt.style.backgroundColor = "lightblue";
+              if (count++ === 3) {
+                clearInterval(intervalID);
+              }
+            } else {
+              elt.style.backgroundColor = "lightgreen";
+            }
+          }, 150);
+          console.log(elt.innerHTML, "clicked");
+        });
+        console.log(elt.innerHTML);
+      });
+    </script>
+  </body>
+</html>
