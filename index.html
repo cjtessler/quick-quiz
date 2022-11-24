@@ -33,25 +33,40 @@
     <script>
       let elts = document.getElementsByClassName("option");
 
-      function blink(elt) {
-        elt.style.visibility = elt.style == "hidden" ? "" : "hidden";
-      }
+      let defaultColor = "lightblue";
+      let correctColor = "lightgreen";
+      let incorrectColor = "lightpink";
+
+      let answer = "George Washington";
 
       Array.prototype.forEach.call(elts, function (elt) {
+
+        // Add event listener
         elt.addEventListener("click", function () {
+
           var count = 1;
-          var intervalID = setInterval(function () {
+
+          var intervalID = setInterval(() => {  
             console.log("count: ", count);
-            if (elt.style.backgroundColor == "lightgreen") {
-              elt.style.backgroundColor = "lightblue";
+            
+            if (elt.style.backgroundColor == defaultColor) {
+
+              if (elt.innerHTML === answer) {
+                elt.style.backgroundColor = correctColor;
+              } else {
+                elt.style.backgroundColor = incorrectColor;
+              }
+
+            } else {
+              elt.style.backgroundColor = defaultColor;
               if (count++ === 3) {
                 clearInterval(intervalID);
               }
-            } else {
-              elt.style.backgroundColor = "lightgreen";
             }
           }, 150);
+
           console.log(elt.innerHTML, "clicked");
+
         });
         console.log(elt.innerHTML);
       });
